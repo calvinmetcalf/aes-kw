@@ -10,7 +10,8 @@
   "license": "MIT",
   "dependencies": {
     "browserify-aes": "^1.0.5",
-    "buffer-equal-constant-time": "^1.0.1"
+    "buffer-equal-constant-time": "^1.0.1",
+    "buffer-xor": "^1.0.3"
   },
   "devDependencies": {
     "tape": "^4.2.2"
