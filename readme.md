@@ -1,6 +1,6 @@
 AES-KW
 ===
-
+[![Build Status](https://travis-ci.org/calvinmetcalf/aes-kw.svg?branch=master)](https://travis-ci.org/calvinmetcalf/aes-kw)
 ```
 npm install --save aes-kw
 ```
