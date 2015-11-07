@@ -1,5 +1,5 @@
 var aes = require('browserify-aes');
-var xor = require('buffer-xor');
+var xor = require('buffer-xor/inplace');
 var bufferEq = require('buffer-equal-constant-time');
 
 var IV = new Buffer('A6A6A6A6A6A6A6A6', 'hex');
