@@ -1,0 +1,22 @@
+{
+  "name": "aes-kw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": "Calvin Metcalf <calvin.metcalf@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "browserify-aes": "^1.0.5",
+    "buffer-equal-constant-time": "^1.0.1"
+  },
+  "devDependencies": {
+    "tape": "^4.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:calvinmetcalf/aes-kw.git"
+  }
+}
