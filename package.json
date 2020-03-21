@@ -6,6 +6,9 @@
   "scripts": {
     "test": "node test.js"
   },
+  "engines": {
+    "node": ">=10.4.0"
+  },
   "author": "Calvin Metcalf <calvin.metcalf@gmail.com>",
   "license": "MIT",
   "dependencies": {

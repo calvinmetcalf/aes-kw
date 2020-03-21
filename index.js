@@ -2,8 +2,8 @@ var aes = require('browserify-aes');
 var xor = require('buffer-xor/inplace');
 var bufferEq = require('buffer-equal-constant-time');
 
-var IV = new Buffer('A6A6A6A6A6A6A6A6', 'hex');
-var EMPTY_BUF = new Buffer('');
+var IV = Buffer.from('A6A6A6A6A6A6A6A6', 'hex');
+var EMPTY_BUF = Buffer.alloc(0);
 function Encrypter(key, decipher) {
   if (decipher) {
     this.cipher = aes.createDecipheriv(getCipherName(key), key, EMPTY_BUF);
@@ -41,12 +41,12 @@ function lsb(b) {
 exports.encrypt = encrypt;
 function encrypt(key, plaintext) {
   if (plaintext.length % 8) {
-    throw new Error('must be 64 bit incriment');
+    throw new Error('must be 64 bit increment');
   }
   var enc = new Encrypter(key);
   var j = -1;
   var i, b;
-  var t = new Buffer(8);
+  var t = Buffer.alloc(8);
   var a = IV;
   var n = plaintext.length / 8;
   var r = createR(plaintext);
@@ -54,7 +54,7 @@ function encrypt(key, plaintext) {
     i = -1;
     while (++i < n) {
       b = enc.encrypt(a, r[i]);
-      t.writeUIntBE((n * j) + i + 1, 0, 8);
+      t.writeBigUInt64BE(BigInt((n * j) + i + 1), 0);
       a = xor(msb(b), t);
       r[i] = lsb(b);
     }
@@ -65,19 +65,19 @@ function encrypt(key, plaintext) {
 exports.decrypt = decrypt;
 function decrypt(key, ciphertext) {
   if (ciphertext.length % 8) {
-    throw new Error('must be 64 bit incriment');
+    throw new Error('must be 64 bit increment');
   }
   var enc = new Encrypter(key, true);
   var j = 6;
   var i, b;
-  var t = new Buffer(8);
+  var t = Buffer.alloc(8);
   var n = ciphertext.length / 8;
   var r = createR(ciphertext);
   var a = r[0];
   while (--j >= 0) {
     i = n;
     while (--i) {
-      t.writeUIntBE(((n - 1)* j) + i, 0, 8);
+      t.writeBigUInt64BE(BigInt(((n - 1)* j) + i), 0);
       a = xor(a, t);
       b = enc.encrypt(a, r[i]);
       a = msb(b);
