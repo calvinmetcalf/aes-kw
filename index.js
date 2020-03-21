@@ -54,7 +54,8 @@ function encrypt(key, plaintext) {
     i = -1;
     while (++i < n) {
       b = enc.encrypt(a, r[i]);
-      t.writeBigUInt64BE(BigInt((n * j) + i + 1), 0);
+      t.writeUInt32BE(0, 0);
+      t.writeUInt32BE((n * j) + i + 1, 4);
       a = xor(msb(b), t);
       r[i] = lsb(b);
     }
@@ -77,7 +78,8 @@ function decrypt(key, ciphertext) {
   while (--j >= 0) {
     i = n;
     while (--i) {
-      t.writeBigUInt64BE(BigInt(((n - 1)* j) + i), 0);
+      t.writeUInt32BE(0, 0);
+      t.writeUInt32BE(((n - 1)* j) + i, 4);
       a = xor(a, t);
       b = enc.encrypt(a, r[i]);
       a = msb(b);
