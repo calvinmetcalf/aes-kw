@@ -42,9 +42,9 @@ test('it works', function (t) {
 function testIt(t, i) {
   t.test('vector:' + i, function (t) {
     t.plan(2);
-    var key = new Buffer(vectors[i].key.replace(/\s/g, ''), 'hex');
-    var plaintext = new Buffer(vectors[i].plaintext.replace(/\s/g, ''), 'hex');
-    var ciphertext = new Buffer(vectors[i].ciphertext.replace(/\s/g, ''), 'hex');
+    var key = Buffer.from(vectors[i].key.replace(/\s/g, ''), 'hex');
+    var plaintext = Buffer.from(vectors[i].plaintext.replace(/\s/g, ''), 'hex');
+    var ciphertext = Buffer.from(vectors[i].ciphertext.replace(/\s/g, ''), 'hex');
     var encrypted = kw.encrypt(key, plaintext);
     t.equals(encrypted.toString('hex'), ciphertext.toString('hex'), 'encrypts');
     var decrypted = kw.decrypt(key, ciphertext);
